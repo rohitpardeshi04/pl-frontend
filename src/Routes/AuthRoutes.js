@@ -5,13 +5,14 @@ import Register from "../Views/Auth/Register";
 
 const AuthRoutes = () => {
   const { path } = useRouteMatch();
+  console.log(path);
   return (
     <>
       <Switch>
-        <Route path={`${path}/`}>
+        <Route exact path={`${path}`}>
           <Login />
         </Route>
-        <Route path={`${path}/register`}>
+        <Route exact path={`${path}/register`}>
           <Register />
         </Route>
       </Switch>

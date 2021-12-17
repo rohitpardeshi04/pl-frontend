@@ -16,15 +16,14 @@ import "./auth.css";
 import Login from "./Login";
 import AuthRoutes from "../../Routes/AuthRoutes";
 import { useSelector } from "react-redux";
-import history from "../../history";
 
 const theme = createTheme();
 
-const SignInSide = (props) => {
+const Auth = (props) => {
   const isAuth = useSelector((state) => state.auth.isAuth);
 
   React.useEffect(() => {
-    if (isAuth) history.push("/dashboard");
+    if (isAuth) props.history.push("/dashboard");
   }, [isAuth]);
 
   return (
@@ -60,8 +59,8 @@ const SignInSide = (props) => {
               padding: "0 15%",
             }}
           >
-            {/* <AuthRoutes /> */}
-            <Login />
+            <AuthRoutes />
+            {/* <Login /> */}
           </Box>
         </Grid>
       </Grid>
@@ -69,4 +68,4 @@ const SignInSide = (props) => {
   );
 };
 
-export default SignInSide;
+export default Auth;

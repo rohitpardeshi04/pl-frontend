@@ -1,0 +1,47 @@
+.sideNav {
+  width: 15vw;
+  background-color: #f3f3f3;
+  min-height: 100vh;
+  position: sticky;
+  color: #525252;
+  z-index: 6;
+}
+.sideNav a {
+  text-decoration: none;
+  color: #525252;
+  font-family: Mulish !important;
+}
+.navList {
+  margin-top: 15vh !important;
+  position: fixed !important;
+  width: 15vw;
+}
+
+.navLogo {
+  margin-top: 3vh;
+  margin-left: 15px;
+  position: fixed;
+}
+.active {
+  color: #ffffff !important;
+}
+
+.navBtn {
+  padding: 15px !important;
+}
+
+.navBtn img {
+  width: 30%;
+}
+
+.active .navBtn:hover {
+  background-color: orange !important;
+}
+
+.active .navBtn {
+  background-color: orange;
+}
+
+/* .active img {
+  mix-blend-mode: color;
+} */

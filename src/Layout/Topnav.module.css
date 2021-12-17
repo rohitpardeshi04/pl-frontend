@@ -1,0 +1,19 @@
+.topNav {
+  width: 100vw;
+  background-color: #f3f3f3;
+  height: 10vh;
+  position: fixed;
+  z-index: 5;
+  padding-left: 15vw;
+}
+
+.search {
+  margin-top: 3vh !important;
+  margin-left: 3vh !important;
+  width: 20vw;
+}
+
+.profile {
+  float: right;
+  margin: 15px;
+}

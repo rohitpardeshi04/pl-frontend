@@ -2,12 +2,13 @@ import { Avatar, Button, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import axios from "axios";
 import { register } from "../../Redux/authentication/actionCreator";
 import { useDispatch } from "react-redux";
 
 const Register = () => {
+  const { path } = useRouteMatch();
   const dispatch = useDispatch();
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -91,7 +92,7 @@ const Register = () => {
         <Grid container>
           <Grid item xs></Grid>
           <Grid item>
-            <Link to="/" variant="body2">
+            <Link to={`/auth`} variant="body2">
               {"Already have an account? Login here"}
             </Link>
           </Grid>

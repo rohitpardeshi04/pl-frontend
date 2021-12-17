@@ -1,7 +1,6 @@
 import actions from "./actions";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import history from "../../history";
+
 const {
   registerBegin,
   registerSuccess,
@@ -10,6 +9,9 @@ const {
   loginSuccess,
   loadUser,
   loginErr,
+  logoutBegin,
+  logoutErr,
+  logoutSuccess,
 } = actions;
 
 const register = (formData) => {
@@ -82,4 +84,24 @@ const login = (formData) => {
   };
 };
 
-export { register, login };
+const logOut = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(logoutBegin());
+      const refresh = localStorage.getItem("refresh_token");
+      const response = await axios.post(
+        process.env.REACT_APP_BASE + "/auth/logout",
+        { refreshToken: refresh }
+      );
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      localStorage.removeItem("user");
+      dispatch(logoutSuccess(false));
+    } catch (err) {
+      console.log(err);
+      dispatch(logoutErr(err));
+    }
+  };
+};
+
+export { register, login, logOut };

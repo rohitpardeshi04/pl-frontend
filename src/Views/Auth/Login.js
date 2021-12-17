@@ -2,13 +2,14 @@ import { Avatar, Button, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../../Redux/authentication/actionCreator";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const { path } = useRouteMatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -55,7 +56,7 @@ const Login = () => {
           id="password"
           autoComplete="current-password"
         />
-
+        {/* <Link to="/dashboard"> */}
         <Button
           type="submit"
           fullWidth
@@ -64,7 +65,7 @@ const Login = () => {
         >
           Login
         </Button>
-
+        {/* </Link> */}
         <Grid container>
           <Grid item xs>
             <Link to="#" variant="body2">
@@ -72,7 +73,7 @@ const Login = () => {
             </Link>
           </Grid>
           <Grid item>
-            <Link to="/register" variant="body2">
+            <Link to={`${path}/register`} variant="body2">
               {"Don't have an account? Register here"}
             </Link>
           </Grid>

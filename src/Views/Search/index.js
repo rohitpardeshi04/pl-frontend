@@ -18,6 +18,7 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import { forwardRef, useState } from "react";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -44,7 +45,10 @@ const tableIcons = {
 };
 
 const SearchPage = () => {
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = () => {
+    setLoading(true);
     var data = JSON.stringify({
       searchQuery: values.query,
       location: values.location,
@@ -53,7 +57,7 @@ const SearchPage = () => {
 
     var config = {
       method: "post",
-      url: "http://localhost:3000/v1/search",
+      url: process.env.REACT_APP_BASE + "/search",
       headers: {
         "Content-Type": "application/json",
       },
@@ -64,8 +68,10 @@ const SearchPage = () => {
       .then(function (response) {
         setData(response.data.responses);
         console.log(response.data.responses);
+        setLoading(false);
       })
       .catch(function (error) {
+        setLoading(false);
         console.log(error);
       });
   };
@@ -99,6 +105,7 @@ const SearchPage = () => {
         id="outlined-required"
         label="Query"
         onChange={handleChange}
+        variant="outlined"
       />
       <TextField
         className="mx-3"
@@ -108,6 +115,7 @@ const SearchPage = () => {
         id="outlined-required"
         label="Location"
         onChange={handleChange}
+        variant="outlined"
       />
       <TextField
         className="mx-3"
@@ -118,21 +126,35 @@ const SearchPage = () => {
         label="Number of Leads"
         type="number"
         onChange={handleChange}
+        variant="outlined"
       />
       <br />
-      <Button variant="contained" className="mt-5" onClick={onSubmit}>
+      <div
+        variant="contained"
+        className="mt-3 btn btn-primary px-5"
+        onClick={onSubmit}
+      >
         Submit
-      </Button>
+      </div>
       <div className="mt-5">
-        <MaterialTable
-          icons={tableIcons}
-          title="Leads"
-          columns={columns}
-          data={data}
-          options={{
-            exportButton: true,
-          }}
-        />
+        {loading && (
+          <>
+            <CircularProgress sx={{ color: "orange" }} />
+            <br />
+            Fetching leads...
+          </>
+        )}
+        {data.length > 0 && !loading && (
+          <MaterialTable
+            icons={tableIcons}
+            title="Leads"
+            columns={columns}
+            data={data}
+            options={{
+              exportButton: true,
+            }}
+          />
+        )}
       </div>
     </div>
   );
